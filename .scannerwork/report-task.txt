@@ -1,0 +1,6 @@
+projectKey=Tarea1-Grafos
+serverUrl=http://127.0.0.1:9000
+serverVersion=8.2.0.32929
+dashboardUrl=http://127.0.0.1:9000/dashboard?id=Tarea1-Grafos
+ceTaskId=AXG9rUA4z6QjWXK5tx3R
+ceTaskUrl=http://127.0.0.1:9000/api/ce/task?id=AXG9rUA4z6QjWXK5tx3R
