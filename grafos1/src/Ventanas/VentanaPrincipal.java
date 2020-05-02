@@ -43,7 +43,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    }
  
 public static int ingresarNodoOrigen(String nodoOrige, String noExiste,int tope){
-    int nodoOrigen = 0;
+    int nodoOrigen = -1;
         try{
             nodoOrigen = Integer.parseInt(JOptionPane.showInputDialog(""+nodoOrige));   
             if(nodoOrigen>=tope){  
@@ -51,7 +51,7 @@ public static int ingresarNodoOrigen(String nodoOrige, String noExiste,int tope)
                   nodoOrigen = ingresarNodoOrigen(nodoOrige,noExiste, tope);
             }
         }catch(Exception ex){
-            nodoOrigen = ingresarNodoOrigen(nodoOrige,noExiste,tope);
+            return nodoOrigen;
         }
         return nodoOrigen;
 }          
@@ -705,16 +705,16 @@ public static int ingresarNodoOrigen(String nodoOrige, String noExiste,int tope)
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-      int Eliminar= ingresarNodoOrigen("Ingrese Nodo a Eliminar ","Nodo No existe",tope); 
- if(Eliminar<=tope && Eliminar>=0 && tope>0){
-        for (int j = 0; j < tope; j++) {
-            for (int k = 0; k < tope; k++){
-                if(j==Eliminar ||k==Eliminar){
-                    Arboles.setmAdyacencia(j, k, -1);                    
+        int Eliminar= ingresarNodoOrigen("Ingrese Nodo a Eliminar ","Nodo No existe",tope);
+        if(Eliminar<=tope && Eliminar>=0 && tope>0){
+            for (int j = 0; j < tope; j++) {
+                for (int k = 0; k < tope; k++){
+                    if(j==Eliminar ||k==Eliminar){
+                        Arboles.setmAdyacencia(j, k, -1);                    
+                    }
                 }
             }
-        }
-        for (int l = 0; l < tope-1; l++) {
+            for (int l = 0; l < tope-1; l++) {
                     for (int m = 0; m < tope; m++) {
                       if(Arboles.getmAdyacencia(l, m)==-1){
                            Arboles.setmAdyacencia(l, m,Arboles.getmAdyacencia(l+1, m)); 
@@ -935,9 +935,13 @@ jPanel1.setBackground(jButton8.getBackground());        // TODO add your handlin
      if(tope>=2){
           permanente =  ingresarNodoOrigen("Ingrese Nodo Origen..","nodo Origen No existe",tope);// hacemos el llamado de la funcion         
           nodoFin =  ingresarNodoOrigen("Ingrese Nodo Fin..","nodo fin No existe",tope);
+          if (permanente != -1 && nodoFin != -1 ){
             algoritmodij Dijkstra = new algoritmodij(Arboles,tope,permanente,nodoFin);
             Dijkstra.dijkstra();
             jtacumulado.setText(""+Dijkstra.getAcumulado());
+          }
+          else
+              JOptionPane.showMessageDialog(null,"Debe ingresar Nodos existentes");
         }
     else JOptionPane.showMessageDialog(null,"Se deben de crear mas nodos ... ");
     }//GEN-LAST:event_jMenuItem13ActionPerformed
